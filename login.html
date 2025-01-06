@@ -7,7 +7,9 @@
     <style>
         @font-face {
             font-family: 'IRANSans';
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font/Vazir.woff2') format('woff2');
+            src: url('fonts/IRANSans Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
 
         body {
@@ -69,13 +71,13 @@
         }
 
         .form-group {
-            margin-bottom: 25px; /* Increased spacing */
+            margin-bottom: 25px;
             position: relative;
         }
 
         .form-group input {
             width: 100%;
-            padding: 10px 40px 10px 10px;
+            padding: 10px 40px 10px 30px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 16px;
@@ -89,10 +91,11 @@
             box-shadow: 0 0 4px rgba(116, 235, 213, 0.5);
         }
 
+        /* Move user and lock icons to the right */
         .form-group i {
             position: absolute;
             top: 50%;
-            right: 15px;
+            right: 10px; /* Right side for user and lock icons */
             transform: translateY(-50%);
             color: #555;
             font-size: 20px;
@@ -131,7 +134,7 @@
 
             .form-group input {
                 font-size: 14px;
-                padding: 8px 30px 8px 8px;
+                padding: 8px 30px 8px 20px;
             }
 
             .form-group i {
@@ -152,14 +155,6 @@
                 preloader.style.opacity = "0";
                 preloader.style.visibility = "hidden";
             }, 1500);
-
-            const passwordInput = document.getElementById("password");
-            passwordInput.addEventListener("focus", () => {
-                passwordInput.type = "text";
-                setTimeout(() => {
-                    passwordInput.type = "password";
-                }, 1000);
-            });
         });
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -172,12 +167,12 @@
         <h1>ورود به سایت</h1>
         <form action="/login" method="POST">
             <div class="form-group">
-                <input type="text" id="username" name="username" placeholder="" required>
-                <i class="fas fa-user"></i>
+                <input type="text" id="username" name="username" placeholder="نام کاربری" required>
+                <i class="fas fa-user"></i> <!-- User icon on the right -->
             </div>
             <div class="form-group">
-                <input type="password" id="password" name="password" placeholder="" required>
-                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="رمز عبور" required>
+                <i class="fas fa-lock"></i> <!-- Lock icon on the right -->
             </div>
             <button type="submit" class="login-btn">ورود</button>
         </form>
