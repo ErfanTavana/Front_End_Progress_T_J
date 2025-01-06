@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم مصاحبه</title>
+    <style>
+        @font-face {
+            font-family: 'IRANSans';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font/Vazir.woff2') format('woff2');
+        }
+
+        body {
+            font-family: 'IRANSans', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            direction: rtl;
+        }
+
+        .survey-container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .survey-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: 'IRANSans', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #74ebd5;
+            box-shadow: 0 0 4px rgba(116, 235, 213, 0.5);
+        }
+
+        .form-group small {
+            color: #aaa;
+            font-size: 14px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .survey-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 18px;
+            font-family: 'IRANSans', sans-serif;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .survey-btn:hover {
+            background: linear-gradient(135deg, #9face6, #74ebd5);
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .navigation-btns {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .issues-container {
+            margin-bottom: 20px;
+        }
+
+        .issue-item {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .remove-issue-btn {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background-color: transparent;
+            color: #ff4d4d;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .remove-issue-btn:hover {
+            color: #e60000;
+        }
+
+        @media (max-width: 480px) {
+            .survey-container {
+                padding: 15px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .survey-btn {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <h1>فرم مصاحبه</h1>
+        <form id="survey-form">
+            <div class="step active" id="step-1">
+                <div class="form-group">
+                    <label for="interviewer-name">نام و نام خانوادگی مصاحبه کننده:</label>
+                    <input type="text" id="interviewer-name" name="interviewer-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="interviewee-name">نام و نام خانوادگی مصاحبه شده:</label>
+                    <input type="text" id="interviewee-name" name="interviewee-name" required>
+                </div>
+                <div class="navigation-btns">
+                    <button type="button" class="survey-btn" onclick="nextStep(2)">بعدی</button>
+                </div>
+            </div>
+
+            <div class="step" id="step-2">
+                <div class="form-group">
+                    <label for="audience-category">مخاطب مسئله شناسی شما جزو کدام دسته است؟</label>
+                    <select id="audience-category" name="audience-category" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="علما و فقها">علما و فقها</option>
+                        <option value="مدیران">مدیران</option>
+                        <option value="اساتید دانشگاه و معلمان">اساتید دانشگاه و معلمان</option>
+                        <option value="بزرگان و معتمدان">بزرگان و معتمدان</option>
+                        <option value="روحانیون و ائمه جماعات">روحانیون و ائمه جماعات</option>
+                    </select>
+                </div>
+                <div class="navigation-btns">
+                    <button type="button" class="survey-btn" onclick="prevStep(1)">قبلی</button>
+                    <button type="button" class="survey-btn" onclick="nextStep(3)">بعدی</button>
+                </div>
+            </div>
+
+            <div class="step" id="step-3">
+                <div class="form-group">
+                    <label for="block">بلوک مصاحبه:</label>
+                    <select id="block" name="block" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="رباط">رباط</option>
+                        <option value="کاریزنو">کاریزنو</option>
+                        <option value="نصرآباد">نصرآباد</option>
+                        <option value="محمودآباد">محمودآباد</option>
+                        <option value="موسی آباد">موسی آباد</option>
+                        <option value="تیمنک">تیمنک</option>
+                        <option value="چاه مزار">چاه مزار</option>
+                        <option value="احمدآباد">احمدآباد</option>
+                        <option value="نیلشهر">نیلشهر</option>
+                        <option value="دولت آباد">دولت آباد</option>
+                        <option value="آقا بیگ">آقا بیگ</option>
+                        <option value="سمیع آباد">سمیع آباد</option>
+                        <option value="بزد">بزد</option>
+                        <option value="رحمت آباد">رحمت آباد</option>
+                        <option value="شیخلو">شیخلو</option>
+                        <option value="رونج">رونج</option>
+                        <option value="چشمه گل">چشمه گل</option>
+                        <option value="معد آباد">معد آباد</option>
+                        <option value="مزار">مزار</option>
+                        <option value="المهدی">المهدی</option>
+                        <option value="خیرآباد">خیرآباد</option>
+                        <option value="مسکن مهر">مسکن مهر</option>
+                        <option value="صیاد">صیاد</option>
+                        <option value="خلیج فارس">خلیج فارس</option>
+                    </select>
+                </div>
+                <div class="navigation-btns">
+                    <button type="button" class="survey-btn" onclick="prevStep(2)">قبلی</button>
+                    <button type="button" class="survey-btn" onclick="nextStep(4)">بعدی</button>
+                </div>
+            </div>
+
+            <div class="step" id="step-4">
+                <div class="form-group">
+                    <label for="issues">مسائل:</label>
+                    <div class="issues-container" id="issues">
+                        <div class="issue-item">
+                            <textarea name="issue[]" rows="4" placeholder="مسئله 1" required onclick="moveTextUp(this)"></textarea>
+                            <small>(لطفا در نوشتن مسئله دقت فرمایید تا دچار کلی گویی یا اعمال نظر شخصی در نوشتن نشوید.)</small>
+                            <button type="button" class="remove-issue-btn" onclick="removeIssue(this)">&#10006;</button>
+                        </div>
+                    </div>
+                    <button type="button" class="survey-btn" onclick="addIssue()">افزودن مسئله</button>
+                </div>
+                <div class="navigation-btns">
+                    <button type="button" class="survey-btn" onclick="prevStep(3)">قبلی</button>
+                    <button type="submit" class="survey-btn">ثبت مصاحبه</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function nextStep(stepNumber) {
+            document.querySelector('.step.active').classList.remove('active');
+            document.getElementById('step-' + stepNumber).classList.add('active');
+        }
+
+        function prevStep(stepNumber) {
+            document.querySelector('.step.active').classList.remove('active');
+            document.getElementById('step-' + stepNumber).classList.add('active');
+        }
+
+        function addIssue() {
+            const issueContainer = document.getElementById('issues');
+            const issueCount = issueContainer.children.length + 1;
+            const newIssue = document.createElement('div');
+            newIssue.classList.add('issue-item');
+            newIssue.innerHTML = `
+                <textarea name="issue[]" rows="4" placeholder="مسئله ${issueCount}" required onclick="moveTextUp(this)"></textarea>
+                <small>(لطفا در نوشتن مسئله دقت فرمایید تا دچار کلی گویی یا اعمال نظر شخصی در نوشتن نشوید.)</small>
+                <button type="button" class="remove-issue-btn" onclick="removeIssue(this)">&#10006;</button>
+            `;
+            issueContainer.appendChild(newIssue);
+        }
+
+        function removeIssue(button) {
+            const issueItem = button.parentElement;
+            issueItem.remove();
+        }
+
+        function moveTextUp(textarea) {
+            textarea.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>

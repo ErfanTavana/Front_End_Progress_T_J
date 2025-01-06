@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم لاگین</title>
+    <style>
+        @font-face {
+            font-family: 'IRANSans';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font/Vazir.woff2') format('woff2');
+        }
+
+        body {
+            font-family: 'IRANSans', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            direction: rtl;
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .preloader div {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #74ebd5;
+            border-top: 4px solid #9face6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .login-container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-family: 'IRANSans', sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 25px; /* Increased spacing */
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 40px 10px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: 'IRANSans', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #74ebd5;
+            box-shadow: 0 0 4px rgba(116, 235, 213, 0.5);
+        }
+
+        .form-group i {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: #555;
+            font-size: 20px;
+            background: #f7f7f7;
+            padding: 5px;
+            border-radius: 50%;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .form-group input:focus + i {
+            transform: translateY(-150%);
+            color: #74ebd5;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-family: 'IRANSans', sans-serif;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #9face6, #74ebd5);
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 15px;
+            }
+
+            .form-group input {
+                font-size: 14px;
+                padding: 8px 30px 8px 8px;
+            }
+
+            .form-group i {
+                font-size: 16px;
+                right: 10px;
+            }
+
+            .login-btn {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const preloader = document.querySelector(".preloader");
+            setTimeout(() => {
+                preloader.style.opacity = "0";
+                preloader.style.visibility = "hidden";
+            }, 1500);
+
+            const passwordInput = document.getElementById("password");
+            passwordInput.addEventListener("focus", () => {
+                passwordInput.type = "text";
+                setTimeout(() => {
+                    passwordInput.type = "password";
+                }, 1000);
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="preloader">
+        <div></div>
+    </div>
+    <div class="login-container">
+        <h1>ورود به سایت</h1>
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="" required>
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="" required>
+                <i class="fas fa-lock"></i>
+            </div>
+            <button type="submit" class="login-btn">ورود</button>
+        </form>
+    </div>
+</body>
+</html>
